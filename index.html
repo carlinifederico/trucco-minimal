@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Geist+Mono:wght@300;400&family=Geist:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Geist+Mono:wght@300;400&family=Geist:wght@300;400;800&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -33,30 +33,43 @@
 
 <!-- About + contacto -->
 <main id="about" class="about">
-  <p class="label">About us</p>
-  <p class="statement">A creative and collaborative group focused on <em>branding</em> &amp; <em>audiovisual</em>.</p>
+  <p class="label" data-reveal>About us</p>
+  <p class="statement">
+    <span class="line" data-reveal><i>We are a</i> <b>Creative</b></span>
+    <span class="line" data-reveal><i>and</i> <b>Collaborative</b></span>
+    <span class="line" data-reveal><b>Group</b> <i>focused on</i></span>
+    <span class="line" data-reveal><b class="hollow">Branding</b> <i>&amp;</i></span>
+    <span class="line" data-reveal><b class="hollow">Audiovisual</b></span>
+  </p>
 
   <div class="people">
-    <div class="person">
-      <h2>Federico Carlini</h2>
-      <p>Creative Director</p>
-      <a href="https://federicocarlini.com" target="_blank" rel="noopener">federicocarlini.com ↗</a>
+    <div class="person person--0" data-reveal>
+      <h2 class="person__name" data-name="Federico&#10;Carlini">Federico<br>Carlini</h2>
+      <p class="person__role">Creative Director</p>
+      <a class="person__link" href="https://federicocarlini.com" target="_blank" rel="noopener"><span>federicocarlini.com</span> <span class="arrow">↗</span></a>
     </div>
-    <div class="person">
-      <h2>Santiago Tereso</h2>
-      <p>Executive Producer</p>
+    <div class="person person--1" data-reveal>
+      <h2 class="person__name" data-name="Santiago&#10;Tereso">Santiago<br>Tereso</h2>
+      <p class="person__role">Executive Producer</p>
       <!-- TODO: LinkedIn real de Santiago -->
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="person__link" href="https://www.linkedin.com/" target="_blank" rel="noopener"><span>LinkedIn</span> <span class="arrow">↗</span></a>
     </div>
   </div>
 
-  <footer class="contact">
-    <p class="label">Contact</p>
+  <footer class="contact" data-reveal>
     <!-- TODO: mail definitivo -->
-    <a class="contact__mail" href="mailto:hello@trucco.studio">hello@trucco.studio</a>
-    <p class="contact__meta"><span>Buenos Aires</span><span>© 2026 TRUCCO</span></p>
+    <a class="contact__mail" href="mailto:hello@trucco.studio">hello@trucco.studio <span class="arrow">↗</span></a>
+    <span>Buenos Aires</span>
+    <span>© 2026 TRUCCO</span>
   </footer>
 </main>
 
+<script>
+  // aparición al entrar en pantalla
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }));
+  document.querySelectorAll('[data-reveal]').forEach((el, i) => { el.style.transitionDelay = `${(i % 6) * 70}ms`; io.observe(el); });
+</script>
 </body>
 </html>
