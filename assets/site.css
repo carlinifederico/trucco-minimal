@@ -1,0 +1,121 @@
+/* TRUCCO — minimal */
+
+:root {
+  --bg: #000;
+  --ink: #e8e4dc;          /* bone */
+  --mute: #75716b;
+  --line: #262523;
+  --red: #bd0a0a;
+  --mono: 'Geist Mono', ui-monospace, Menlo, monospace;
+  --sans: 'Geist', 'Helvetica Neue', Arial, sans-serif;
+  --roman: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --pad: max(16px, 3vw);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 300 13px/1.5 var(--mono);
+  letter-spacing: .01em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--red); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+h1, h2, p { margin: 0; }
+
+.label { font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: var(--mute); }
+
+/* ── llegada ─────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh; height: 100svh;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.hero__reel, .hero__shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__reel { object-fit: cover; }
+.hero__shade {
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 75%),
+    linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, #000);
+}
+.wordmark {
+  position: relative;
+  font: 400 clamp(56px, 13vw, 220px)/1 var(--roman);
+  letter-spacing: .08em;
+  margin-right: -.08em;     /* compensa el tracking del último caracter */
+  text-shadow: 0 0 60px rgba(0,0,0,.35);
+  animation: rise 1.6s var(--ease) both;
+}
+.hero__caption {
+  position: absolute; left: 0; right: 0; bottom: calc(var(--pad) + 44px);
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .28em;
+  animation: rise 1.6s .3s var(--ease) both;
+}
+.hero__caption i { width: 36px; height: 1px; background: var(--red); }
+.hero__down {
+  position: absolute; bottom: var(--pad); left: 50%; translate: -50% 0;
+  font-size: 10px; text-transform: uppercase; letter-spacing: .3em; color: var(--mute);
+  padding: 6px 0 6px .3em;
+  transition: color .3s;
+}
+.hero__down:hover { color: var(--ink); }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+
+/* ── about + contacto ────────────────────────────────────── */
+.about {
+  min-height: 100vh; min-height: 100svh;
+  padding: 18vh var(--pad) var(--pad);
+  display: flex; flex-direction: column;
+  max-width: 1800px; margin: 0 auto;
+}
+.statement {
+  margin-top: 28px;
+  max-width: 17em;
+  font: 300 clamp(30px, 5vw, 76px)/1.08 var(--sans);
+  letter-spacing: -.02em;
+}
+.statement em { font-style: normal; color: var(--mute); }
+
+.people {
+  margin-top: 14vh;
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--pad);
+  border-top: 1px solid var(--line);
+}
+.person { padding-top: 22px; display: grid; gap: 6px; }
+.person h2 { font: 400 clamp(22px, 2.6vw, 38px)/1.1 var(--sans); letter-spacing: -.01em; }
+.person p { color: var(--mute); }
+.person a { justify-self: start; margin-top: 8px; border-bottom: 1px solid var(--line); transition: border-color .3s; }
+.person a:hover { border-color: var(--red); }
+
+.contact {
+  margin-top: auto; padding-top: 16vh;
+  display: grid; gap: 14px;
+}
+.contact__mail {
+  justify-self: start;
+  font: 300 clamp(26px, 4.6vw, 68px)/1.1 var(--sans); letter-spacing: -.02em;
+  transition: color .3s;
+}
+.contact__mail:hover { color: var(--red); }
+.contact__meta {
+  margin-top: 8vh; padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: var(--mute);
+}
+
+@media (max-width: 640px) {
+  .people { grid-template-columns: 1fr; }
+  .contact__mail { font-size: 7.4vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wordmark, .hero__caption { animation: none; }
+  html { scroll-behavior: auto; }
+}
